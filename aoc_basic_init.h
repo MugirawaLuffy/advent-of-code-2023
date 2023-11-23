@@ -2,7 +2,27 @@
 #pragma once
 #include <stdbool.h>
 
-#define AOC_ERROR -1
+#define AOC_NO_ERROR 0
+
+#define AOC_CHECK(x)                                                           \
+  do {                                                                         \
+    int retval = (x);                                                          \
+    if (retval != AOC_NO_ERROR) {                                              \
+      fprintf(stderr, "Runtime error: %s returned %d at %s:%d", #x, retval,    \
+              __FILE__, __LINE__);                                             \
+      return;                                                                  \
+    }                                                                          \
+  } while (0)
+
+#define AOC_CHECK_AND_DO(x, y)                                                 \
+  do {                                                                         \
+    int retval = (x);                                                          \
+    if (retval != AOC_NO_ERROR) {                                              \
+      fprintf(stderr, "Runtime error: %s returned %d at %s:%d", #x, retval,    \
+              __FILE__, __LINE__);                                             \
+      y;                                                                       \
+    }                                                                          \
+  } while (0)
 
 // Unsigned int types.
 typedef unsigned char u8;

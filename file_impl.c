@@ -24,5 +24,5 @@ i32 aoc_file_by_name(const char *file_name, AOC_InputFile *out_file) {
   fread(out_file->buffer, 1, out_file->fileLength, f);
   fclose(f);
 
-  return out_file->buffer ? 0 : -3;
+  return out_file->buffer ? AOC_NO_ERROR : -3;
 }
