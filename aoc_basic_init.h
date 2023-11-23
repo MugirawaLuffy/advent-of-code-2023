@@ -2,6 +2,8 @@
 #pragma once
 #include <stdbool.h>
 
+#define AOC_ERROR -1
+
 // Unsigned int types.
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -49,3 +51,10 @@ typedef struct range {
 #define BOLDMAGENTA "\033[1m\033[35m" /* Bold Magenta */
 #define BOLDCYAN "\033[1m\033[36m"    /* Bold Cyan */
 #define BOLDWHITE "\033[1m\033[37m"   /* Bold White */
+
+typedef struct {
+  i64 fileLength;
+  u8 *buffer;
+} AOC_InputFile;
+
+i32 aoc_file_by_name(const char *file_name, AOC_InputFile *out_file);

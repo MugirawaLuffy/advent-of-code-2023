@@ -1,4 +1,4 @@
-#include "../inittypes.h"
+#include "../aoc_basic_init.h"
 #include <stdio.h>
 
 i32 main(void) {
