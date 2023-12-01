@@ -1,6 +1,25 @@
 
 #pragma once
 #include <stdbool.h>
+#define MAX_TOKENS = 200
+
+#if defined(__unix__) || defined(__APPLE__) /* __unix__ is usually defined by  \
+                 compilers targeting Unix systems */
+#define OS_UNIX
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#elif defined(_WIN32) || defined(WIN32)
+
+#define OS_WINDOWS
+#include <malloc.h>
+#include <stdio.h>
+#include <tchar.h>
+#define DIV 1048576
+
+#endif
 
 #define AOC_NO_ERROR 0
 
@@ -74,7 +93,29 @@ typedef struct range {
 
 typedef struct {
   i64 fileLength;
-  u8 *buffer;
+  char *buffer;
 } AOC_InputFile;
 
+typedef struct {
+  i32 lineLength;
+  char *buffer;
+} AOC_SingleLine;
+
+typedef struct {
+  i32 number_of_lines;
+  AOC_SingleLine *lines;
+} AOC_LinesCollection;
+
 i32 aoc_file_by_name(const char *file_name, AOC_InputFile *out_file);
+
+int aoc_split_string(const char *input_string, const char *delimiter,
+                     AOC_LinesCollection *output);
+int aoc_split_file_by_lines(AOC_InputFile *input, AOC_LinesCollection *output);
+
+void aoc_free_lines(AOC_LinesCollection *output);
+
+bool aoc_char_is_digit(char c);
+
+int aoc_parse_int_from_char(char c);
+
+int aoc_parse_int_from_string(char *str);
