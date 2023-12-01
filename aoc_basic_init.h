@@ -119,3 +119,12 @@ bool aoc_char_is_digit(char c);
 int aoc_parse_int_from_char(char c);
 
 int aoc_parse_int_from_string(char *str);
+
+void aoc_str_append_char(char *s, char c);
+
+void aoc_str_append_int(char *s, i8 i);
+
+char *aoc_substring(char *str, int start_pos, int end_pos);
+
+bool aoc_str_starts_with(char *str, char *expected_start, i16 str_len,
+                         i16 pattern_len);

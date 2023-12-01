@@ -131,4 +131,32 @@ bool aoc_char_is_digit(char c) { return (c >= '0' && c <= '9'); }
 
 int aoc_parse_int_from_char(char c) { return c - '0'; }
 
-int aoc_parse_int_from_string(char *str) {}
+void aoc_str_append_char(char *s, char c) {
+  int len = strlen(s);
+  s[len] = c;
+  s[len + 1] = '\0';
+}
+
+char *aoc_substring(char *str, int start_pos, int end_pos) {
+  char *buffer = malloc(sizeof(char) * (end_pos - start_pos));
+  for (int i = start_pos; i < end_pos; i++) {
+    buffer[i - start_pos] = str[i];
+  }
+
+  return buffer;
+}
+
+bool aoc_str_starts_with(char *str, char *expected_start, i16 str_len,
+                         i16 pattern_len) {
+  if (str_len < pattern_len) {
+    // printf(RED "Error: pattern bigger than string (%d, %d)\n" RESET,
+    //        pattern_len, str_len);
+    return false;
+  }
+
+  for (int i = 0; i < pattern_len; i++) {
+    if (str[i] != expected_start[i])
+      return false;
+  }
+  return true;
+}
